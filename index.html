@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toshi & Aditya | Engagement Invitation</title>
 
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://aditya3690.github.io/adi-toshi-engagement/"
+    />
+    <meta property="og:title" content="Toshi & Aditya - Engagement Ceremony" />
+    <meta
+      property="og:description"
+      content="You're invited to celebrate the engagement of Toshi & Aditya! Join us for this beautiful beginning of forever."
+    />
+    <meta
+      property="og:image"
+      content="https://aditya3690.github.io/adi-toshi-engagement/og-preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Toshi & Aditya Engagement" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://aditya3690.github.io/adi-toshi-engagement/"
+    />
+    <meta name="twitter:title" content="Toshi & Aditya - Engagement Ceremony" />
+    <meta
+      name="twitter:description"
+      content="You're invited to celebrate the engagement of Toshi & Aditya! Join us for this beautiful beginning of forever."
+    />
+    <meta
+      name="twitter:image"
+      content="https://aditya3690.github.io/adi-toshi-engagement/og-preview.png"
+    />
+
+    <!-- General Meta -->
+    <meta
+      name="description"
+      content="You're invited to celebrate the engagement of Toshi & Aditya! Join us for this beautiful beginning of forever."
+    />
+    <meta name="theme-color" content="#c9a227" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -135,12 +177,8 @@
         width: 100%;
         height: 100%;
         z-index: 9999;
-        pointer-events: auto;
-        display: flex;
-      }
-
-      .curtain-overlay.curtain-hidden {
         pointer-events: none;
+        display: flex;
       }
 
       .curtain-panel {
@@ -1892,87 +1930,65 @@
         opacity: 0.6;
       }
 
-      /* ============================================
-         SPLASH CONTENT (on curtain)
-         ============================================ */
-      .splash-content {
-        position: absolute;
-        inset: 0;
-        z-index: 10;
+      .curtain-center {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         pointer-events: auto;
         cursor: pointer;
-        text-align: center;
-        padding: 20px;
       }
 
-      .splash-ornament {
-        width: 60px;
-        height: 2px;
+      .curtain-center .open-label {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: rgba(240, 228, 168, 0.55);
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        animation: labelPulse 3s ease-in-out infinite;
+      }
+
+      .curtain-center .open-ornament {
+        width: 80px;
+        height: 1px;
         background: linear-gradient(
           90deg,
           transparent,
-          var(--gold-light),
+          rgba(201, 162, 39, 0.4),
+          rgba(240, 228, 168, 0.3),
+          rgba(201, 162, 39, 0.4),
           transparent
         );
-        margin: 14px auto;
+        margin: 12px 0;
         border-radius: 1px;
       }
 
-      .splash-label {
+      .curtain-center .tap-hint {
         font-family: "Cormorant Garamond", serif;
         font-size: 0.85rem;
-        letter-spacing: 0.3em;
+        color: rgba(240, 228, 168, 0.6);
+        letter-spacing: 3px;
         text-transform: uppercase;
-        color: #f0e4a8;
-        opacity: 0.85;
-        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+        animation: labelPulse 2.5s ease-in-out infinite;
+        animation-delay: 0.5s;
       }
 
-      .splash-names {
-        font-family: "Great Vibes", cursive;
-        font-size: clamp(2.4rem, 7vw, 4rem);
-        color: var(--gold-light);
-        margin: 6px 0 2px;
-        text-shadow:
-          0 2px 12px rgba(0, 0, 0, 0.5),
-          0 0 30px rgba(232, 212, 139, 0.2);
-      }
-
-      .splash-btn {
-        margin-top: 32px;
-        padding: 14px 44px;
-        border: 1.5px solid var(--gold-light);
-        border-radius: 50px;
-        background: rgba(201, 162, 39, 0.1);
-        color: var(--gold-light);
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        animation: splashPulse 2s ease-in-out infinite;
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-      }
-
-      .splash-btn:hover {
-        background: rgba(201, 162, 39, 0.25);
-        border-color: #f0e4a8;
-        color: #fff;
-      }
-
-      @keyframes splashPulse {
+      @keyframes labelPulse {
         0%,
         100% {
-          box-shadow: 0 0 0 0 rgba(232, 212, 139, 0.35);
+          opacity: 0.7;
         }
+
         50% {
-          box-shadow: 0 0 0 14px rgba(232, 212, 139, 0);
+          opacity: 1;
         }
       }
 
@@ -2064,7 +2080,8 @@
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
-        .curtain-overlay {
+        .curtain-overlay,
+        .curtain-center {
           display: none;
         }
         .content,
@@ -2089,6 +2106,15 @@
          RESPONSIVE - mobile-first, scale up
          ============================================ */
       @media (min-width: 481px) {
+        .curtain-center .open-label {
+          font-size: 1.2rem;
+          letter-spacing: 6px;
+        }
+
+        .curtain-center .open-ornament {
+          width: 100px;
+        }
+
         .toran-container {
           height: 110px;
         }
@@ -2169,6 +2195,15 @@
       }
 
       @media (min-width: 769px) {
+        .curtain-center .open-label {
+          font-size: 1.3rem;
+          letter-spacing: 7px;
+        }
+
+        .curtain-center .open-ornament {
+          width: 120px;
+        }
+
         .toran-container {
           height: 140px;
         }
@@ -2272,6 +2307,11 @@
         animation: none;
         opacity: 0;
       }
+
+      body.gsap-ready .curtain-center {
+        opacity: 1;
+      }
+
       body.gsap-ready .side-garland {
         animation: none;
         opacity: 0;
@@ -2319,15 +2359,8 @@
   </head>
 
   <body class="curtain-open">
-    <!-- CURTAIN with SPLASH -->
+    <!-- CURTAIN -->
     <div class="curtain-overlay" id="curtain-overlay">
-      <div class="splash-content" id="splash-content">
-        <span class="splash-label">You are cordially invited</span>
-        <div class="splash-ornament"></div>
-        <div class="splash-names">Toshi & Aditya</div>
-        <div class="splash-ornament"></div>
-        <button class="splash-btn" id="splash-btn">Open Invitation</button>
-      </div>
       <div class="curtain-panel left">
         <div class="curtain-folds"></div>
         <div class="curtain-gathered"></div>
@@ -2492,6 +2525,13 @@
           />
         </svg>
       </div>
+    </div>
+
+    <!-- Open Invitation tap target -->
+    <div class="curtain-center" id="curtain-center">
+      <div class="open-ornament"></div>
+      <div class="open-label">Tap to Reveal</div>
+      <div class="open-ornament"></div>
     </div>
 
     <div class="page-wrapper">
@@ -4587,7 +4627,7 @@
       </div>
     </div>
 
-    <audio id="bgm" loop preload="auto">
+    <audio id="bgm" loop preload="auto" playsinline>
       <source src="music-trimmed.mp3" type="audio/mpeg" />
     </audio>
 
@@ -4605,8 +4645,23 @@
 
         const master = gsap.timeline({ paused: true });
 
-        // --- Curtain reveal ---
+        // --- Curtain center fade out ---
         master
+          .to(
+            "#curtain-center",
+            {
+              opacity: 0,
+              duration: 0.4,
+              ease: "power2.in",
+              onComplete() {
+                document.getElementById("curtain-center").style.display =
+                  "none";
+              },
+            },
+            0,
+          )
+
+          // --- Curtain reveal ---
           .to(
             ".curtain-panel.left",
             {
@@ -4614,7 +4669,7 @@
               duration: 2.2,
               ease: "power3.inOut",
             },
-            0.5,
+            0.3,
           )
           .to(
             ".curtain-panel.right",
@@ -4623,15 +4678,15 @@
               duration: 2.2,
               ease: "power3.inOut",
             },
-            0.5,
+            0.3,
           )
           .add(() => {
             document.body.classList.remove("curtain-open");
-          }, 2.8)
+          }, 2.6)
           .add(() => {
             const c = document.getElementById("curtain-overlay");
             if (c) c.classList.add("curtain-hidden");
-          }, 3.5)
+          }, 3.3)
 
           // --- Toran fade in ---
           .to(
@@ -4641,7 +4696,7 @@
               duration: 1.2,
               ease: "power2.out",
             },
-            2.2,
+            2.0,
           )
 
           // --- Content reveal ---
@@ -4652,7 +4707,7 @@
               duration: 1.2,
               ease: "power1.out",
             },
-            2.6,
+            2.4,
           )
 
           // --- Corner florals with stagger (opacity only to preserve mirror transforms) ---
@@ -4664,7 +4719,7 @@
               stagger: 0.2,
               ease: "power2.out",
             },
-            2.8,
+            2.6,
           )
 
           // --- Gold frame ---
@@ -4675,7 +4730,7 @@
               duration: 1.2,
               ease: "power1.out",
             },
-            2.8,
+            2.6,
           )
 
           // --- Side garlands ---
@@ -4687,7 +4742,7 @@
               stagger: 0.15,
               ease: "power2.out",
             },
-            3.0,
+            2.8,
           )
 
           // --- Music toggle ---
@@ -4698,8 +4753,26 @@
               duration: 0.6,
               ease: "power1.out",
             },
-            3.8,
+            3.6,
           );
+
+        // --- Wait for user tap to open ---
+        document.getElementById("curtain-center").addEventListener(
+          "click",
+          function openCurtain() {
+            master.play();
+            const music = document.getElementById("bgm");
+            const musicToggle = document.getElementById("music-toggle");
+            music
+              .play()
+              .then(() => {
+                window._musicPlaying = true;
+                musicToggle.classList.add("playing");
+              })
+              .catch(() => {});
+          },
+          { once: true },
+        );
 
         // --- Text reveals with stagger ---
         gsap.utils.toArray(".text-reveal").forEach((el) => {
@@ -5187,54 +5260,19 @@
         // =============================================
         const music = document.getElementById("bgm");
         const musicToggle = document.getElementById("music-toggle");
-        let musicPlaying = false;
+        window._musicPlaying = window._musicPlaying || false;
         music.volume = 0.7;
 
         window.toggleMusic = function () {
-          if (musicPlaying) {
+          if (window._musicPlaying) {
             music.pause();
             musicToggle.classList.remove("playing");
           } else {
             music.play().catch(() => {});
             musicToggle.classList.add("playing");
           }
-          musicPlaying = !musicPlaying;
+          window._musicPlaying = !window._musicPlaying;
         };
-
-        // =============================================
-        // SPLASH → START MUSIC + CURTAIN OPEN
-        // =============================================
-        const splashContent = document.getElementById("splash-content");
-        let opened = false;
-
-        function openInvitation() {
-          if (opened) return;
-          opened = true;
-
-          music
-            .play()
-            .then(() => {
-              musicPlaying = true;
-              musicToggle.classList.add("playing");
-            })
-            .catch(() => {});
-
-          gsap.to(splashContent, {
-            opacity: 0,
-            scale: 1.05,
-            duration: 0.5,
-            ease: "power2.in",
-            onComplete() {
-              splashContent.style.display = "none";
-              master.play();
-            },
-          });
-        }
-
-        splashContent.addEventListener("click", openInvitation);
-        splashContent.addEventListener("touchstart", openInvitation, {
-          passive: true,
-        });
       });
     </script>
   </body>
