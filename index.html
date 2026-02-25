@@ -1945,6 +1945,12 @@
         justify-content: center;
         pointer-events: auto;
         cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
       }
 
       .curtain-center .open-label {
@@ -1956,9 +1962,11 @@
         text-transform: uppercase;
         text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         animation: labelPulse 3s ease-in-out infinite;
+        pointer-events: none;
       }
 
       .curtain-center .open-ornament {
+        pointer-events: none;
         width: 80px;
         height: 1px;
         background: linear-gradient(
@@ -1981,6 +1989,7 @@
         text-transform: uppercase;
         animation: labelPulse 2.5s ease-in-out infinite;
         animation-delay: 0.5s;
+        pointer-events: none;
       }
 
       @keyframes labelPulse {
@@ -4219,7 +4228,11 @@
             <div class="card-content">
               <p class="save-date-title">Save the Date</p>
               <div class="date-display">
-                <p class="date-main">Thursday, 12 March | 11 AM</p>
+                <p class="date-main">Thursday, 12 March</p>
+              </div>
+              <div style="text-align: center; margin-top: 0.5rem;">
+                <p class="date-main">10:00 AM</p>
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #6B5E50; margin-top: 0.3rem;">Pooja followed by Lunch</p>
               </div>
               <div class="details-divider">
                 <span class="details-divider-line"></span>
@@ -4645,22 +4658,41 @@
           );
 
         // --- Wait for user tap to open ---
-        document.getElementById("curtain-center").addEventListener(
-          "click",
-          function openCurtain() {
-            master.play();
-            var music = document.getElementById("bgm");
-            var musicToggle = document.getElementById("music-toggle");
-            music
-              .play()
+        var curtainCenter = document.getElementById("curtain-center");
+        var curtainOpened = false;
+
+        function openCurtain(e) {
+          if (e) e.preventDefault();
+          if (curtainOpened) return;
+          curtainOpened = true;
+
+          master.play();
+
+          var music = document.getElementById("bgm");
+          var musicToggle = document.getElementById("music-toggle");
+
+          music.muted = false;
+          var playPromise = music.play();
+          if (playPromise !== undefined) {
+            playPromise
               .then(function () {
                 window._musicPlaying = true;
                 musicToggle.classList.add("playing");
               })
-              .catch(function () {});
-          },
-          { once: true },
-        );
+              .catch(function () {
+                document.addEventListener("touchstart", function resumeAudio() {
+                  music.play().then(function () {
+                    window._musicPlaying = true;
+                    musicToggle.classList.add("playing");
+                  }).catch(function () {});
+                  document.removeEventListener("touchstart", resumeAudio);
+                }, { once: true });
+              });
+          }
+        }
+
+        curtainCenter.addEventListener("click", openCurtain, { once: true });
+        curtainCenter.addEventListener("touchend", openCurtain, { once: true, passive: false });
 
         // --- Text reveals with stagger ---
         gsap.utils.toArray(".text-reveal").forEach((el) => {
